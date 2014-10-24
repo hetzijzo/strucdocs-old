@@ -6,6 +6,7 @@ import lombok.ToString;
 import org.codehaus.jackson.annotate.JsonAutoDetect;
 import org.neo4j.graphdb.Direction;
 import org.springframework.data.neo4j.annotation.GraphId;
+import org.springframework.data.neo4j.annotation.NodeEntity;
 import org.springframework.data.neo4j.annotation.RelatedTo;
 
 import javax.validation.constraints.NotNull;
@@ -14,7 +15,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-
+@NodeEntity
 @JsonAutoDetect
 @Data
 @ToString(exclude = {"transposedChordNote"})

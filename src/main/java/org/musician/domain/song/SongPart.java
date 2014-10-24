@@ -28,14 +28,14 @@ public class SongPart
 	@NotNull
 	private SongPartType type;
 
-//	@RelatedTo(type = "CONTAINS_LINE", direction = Direction.OUTGOING)
-//	@Fetch
-//	private List<SongLine> lines;
-//
-//	public void addLine(SongLine line) {
-//		if (this.lines == null) {
-//			this.lines = new LinkedList<SongLine>();
-//		}
-//		this.lines.add(line);
-//	}
+	@RelatedTo(type = "CONTAINS_LINE", direction = Direction.OUTGOING)
+	@Fetch
+	private List<SongLine> lines;
+
+	public void addLine(SongLine line) {
+		if (this.lines == null) {
+			this.lines = new LinkedList<SongLine>();
+		}
+		this.lines.add(line);
+	}
 }

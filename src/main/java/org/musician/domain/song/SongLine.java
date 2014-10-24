@@ -23,12 +23,12 @@ public class SongLine
 	@GraphId
 	private Long id;
 
-//	@NotNull
-//	@RelatedTo(type = "CONTAINS_CHORD", direction = Direction.OUTGOING)
-//	@Fetch
-//	private Chord chord;
-//
-//	@RelatedTo(type = "CONTAINS_LYRIC", direction = Direction.OUTGOING)
-//	@Fetch
-//	private Lyric lyric;
+	@NotNull
+	@RelatedTo(type = "CONTAINS_CHORD", direction = Direction.OUTGOING)
+	@Fetch
+	private Chord chord;
+
+	@RelatedTo(type = "CONTAINS_LYRIC", direction = Direction.OUTGOING)
+	@Fetch
+	private Lyric lyric;
 }
