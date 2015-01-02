@@ -9,5 +9,6 @@ public final class Relationship {
 	public static final String CONTAINS_SONG = "CONTAINS_SONG";
 	public static final String PLAYS_IN = "PLAYS_IN";
 	public static final String PERFORMED_BY = "PERFORMED_BY";
+	public static final String PLAYS_GENRE = "PLAYS_GENRE";
 
 }

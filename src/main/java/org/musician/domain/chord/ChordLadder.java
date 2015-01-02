@@ -11,31 +11,19 @@ public enum ChordLadder {
 	Down(ChordNote.AFlat, ChordNote.G, ChordNote.GFlat, ChordNote.F, ChordNote.E, ChordNote.EFlat, ChordNote.D, ChordNote.DFlat,
 			ChordNote.C, ChordNote.B, ChordNote.BFlat, ChordNote.A);
 
-	private final LinkedList<ChordNote> chordNotes;
+	final LinkedList<ChordNote> chordNotes;
 
 	private ChordLadder(ChordNote... chordNotes) {
-		this.chordNotes = new LinkedList<ChordNote>();
-		this.chordNotes.addAll(Arrays.asList(chordNotes));
-	}
-
-	public List<ChordNote> getChordNotes() {
-		return this.chordNotes;
+		this.chordNotes = new LinkedList<>(Arrays.asList(chordNotes));
 	}
 
 	public ChordNote transpose(ChordNote chordNote, int steps) {
-		List<ChordNote> chordNoteList = getChordNotes();
-		int currentPosition;
-		for (currentPosition = 0; currentPosition < getChordNotes().size(); currentPosition++) {
-			if (chordNoteList.get(currentPosition) == chordNote) {
-				break;
-			}
-		}
-
-		int newPosition = (currentPosition + steps) % 12;
+		int index = chordNotes.indexOf(chordNote);
+		int newPosition = (index + steps) % 12;
 		if (newPosition < 0) {
 			newPosition += 12;
 		}
 
-		return getChordNotes().get(newPosition);
+		return chordNotes.get(newPosition);
 	}
 }

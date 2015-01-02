@@ -3,6 +3,7 @@ package org.musician.domain;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
+import lombok.experimental.Builder;
 import org.codehaus.jackson.annotate.JsonAutoDetect;
 import org.codehaus.jackson.annotate.JsonIgnore;
 import org.musician.domain.song.Song;
@@ -20,6 +21,7 @@ import java.util.Set;
 @NodeEntity
 @JsonAutoDetect
 @Data
+@Builder
 @ToString(exclude = {"songs"})
 @EqualsAndHashCode(exclude = {"songs"})
 public class Artist

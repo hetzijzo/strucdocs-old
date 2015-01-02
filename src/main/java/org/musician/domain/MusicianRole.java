@@ -30,9 +30,7 @@ public class MusicianRole
 	private Instrument instrument;
 
 	public MusicianRole(Musician musician, Band band, Instrument instrument) {
-		Assert.notNull(musician);
-		Assert.notNull(band);
-		Assert.notNull(instrument);
+		Assert.noNullElements(new Object[]{musician, band, instrument});
 		this.musician = musician;
 		this.band = band;
 		this.instrument = instrument;

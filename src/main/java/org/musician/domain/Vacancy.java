@@ -1,6 +1,7 @@
 package org.musician.domain;
 
 import lombok.Data;
+import lombok.experimental.Builder;
 import org.codehaus.jackson.annotate.JsonAutoDetect;
 import org.codehaus.jackson.annotate.JsonIgnore;
 import org.springframework.data.neo4j.annotation.GraphId;
@@ -11,6 +12,7 @@ import java.io.Serializable;
 
 @JsonAutoDetect
 @Data
+@Builder
 public class Vacancy
 		implements Serializable {
 

@@ -26,7 +26,7 @@ public class MusicianApplication
 		application.run(args);
 	}
 
-	@Bean
+	@Bean(destroyMethod = "shutdown")
 	public GraphDatabaseService graphDatabaseService() {
 		return new GraphDatabaseFactory().newEmbeddedDatabase("musician.db");
 	}

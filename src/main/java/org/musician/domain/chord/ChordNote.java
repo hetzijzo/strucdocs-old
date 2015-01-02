@@ -19,14 +19,10 @@ public enum ChordNote {
 	GSharp("G#"),
 	AFlat("Ab");
 
-	private String name;
+	String notation;
 
-	private ChordNote(String name) {
-		this.name = name;
-	}
-
-	public String getName() {
-		return name;
+	private ChordNote(String notation) {
+		this.notation = notation;
 	}
 
 	public ChordNote transpose(int steps) {
@@ -39,5 +35,10 @@ public enum ChordNote {
 		}
 
 		return ladder.transpose(this, steps);
+	}
+
+	@Override
+	public String toString() {
+		return notation;
 	}
 }

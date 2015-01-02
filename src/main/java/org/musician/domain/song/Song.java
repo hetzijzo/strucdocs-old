@@ -9,7 +9,8 @@ import org.springframework.data.neo4j.support.index.IndexType;
 
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
-import java.util.HashSet;
+import java.util.Collections;
+import java.util.LinkedHashSet;
 import java.util.Set;
 
 @NodeEntity
@@ -25,6 +26,7 @@ public class Song
 
 	@NotNull
 	@Indexed(indexName = "songTitle_Idx", indexType = IndexType.FULLTEXT)
+	@Fetch
 	private String title;
 
 	@RelatedTo(type = Relationship.PERFORMED_BY)
@@ -34,12 +36,13 @@ public class Song
 
 	@RelatedTo(type = "CONTAINS_PART")
 	@Fetch
-	private Set<SongPart> songParts;
+	private Set<SongPart> songParts = new LinkedHashSet<>();
+
+	public Set<SongPart> getSongParts() {
+		return Collections.unmodifiableSet(songParts);
+	}
 
 	public void addSongPart(SongPart songPart) {
-		if (songParts == null) {
-			songParts = new HashSet<>();
-		}
 		songParts.add(songPart);
 	}
 }

@@ -1,5 +1,6 @@
 package org.musician.domain.song;
 
+import com.fasterxml.jackson.annotation.JsonUnwrapped;
 import lombok.Data;
 import org.codehaus.jackson.annotate.JsonAutoDetect;
 import org.musician.domain.chord.Chord;
@@ -26,9 +27,11 @@ public class SongLine
 	@NotNull
 	@RelatedTo(type = "CONTAINS_CHORD", direction = Direction.OUTGOING)
 	@Fetch
+	@JsonUnwrapped
 	private Chord chord;
 
 	@RelatedTo(type = "CONTAINS_LYRIC", direction = Direction.OUTGOING)
 	@Fetch
+	@JsonUnwrapped
 	private Lyric lyric;
 }

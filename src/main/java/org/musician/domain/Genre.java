@@ -1,6 +1,8 @@
 package org.musician.domain;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.experimental.Builder;
 import org.codehaus.jackson.annotate.JsonAutoDetect;
 import org.springframework.data.neo4j.annotation.GraphId;
 import org.springframework.data.neo4j.annotation.Indexed;
@@ -13,6 +15,8 @@ import java.io.Serializable;
 @NodeEntity
 @JsonAutoDetect
 @Data
+@Builder
+@EqualsAndHashCode(of = {"id"})
 public class Genre
 		implements Serializable {
 
