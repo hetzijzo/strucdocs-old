@@ -3,12 +3,10 @@ package org.musician.web;
 import org.musician.domain.Band;
 import org.musician.domain.Instrument;
 import org.musician.domain.Musician;
-import org.musician.domain.Repertoire;
 import org.musician.repository.BandRepository;
 import org.musician.repository.MusicianRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -22,7 +20,6 @@ public class BandController {
 	private MusicianRepository musicianRepository;
 
 	@RequestMapping
-	@ResponseBody
 	public Band getBand() {
 		Band band = bandRepository.findByName("Make My Day");
 

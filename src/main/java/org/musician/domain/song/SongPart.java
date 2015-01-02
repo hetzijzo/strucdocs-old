@@ -10,8 +10,8 @@ import org.springframework.data.neo4j.annotation.RelatedTo;
 
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 
 @NodeEntity
@@ -30,11 +30,11 @@ public class SongPart
 
 	@RelatedTo(type = "CONTAINS_LINE", direction = Direction.OUTGOING)
 	@Fetch
-	private List<SongLine> lines;
+	private Set<SongLine> lines;
 
 	public void addLine(SongLine line) {
 		if (this.lines == null) {
-			this.lines = new LinkedList<SongLine>();
+			this.lines = new HashSet<>();
 		}
 		this.lines.add(line);
 	}

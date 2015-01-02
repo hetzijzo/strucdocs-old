@@ -7,7 +7,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public interface TransposerComponent {
 
-	public Song transposeSong(Song song, int steps);
+	Song transposeSong(Song song, int steps);
 
-	public Chord transposeChord(Chord chord, int steps);
+	Chord transposeChord(Chord chord, int steps);
 }

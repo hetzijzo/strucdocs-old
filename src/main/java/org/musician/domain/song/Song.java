@@ -9,8 +9,8 @@ import org.springframework.data.neo4j.support.index.IndexType;
 
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 @NodeEntity
 @JsonAutoDetect
@@ -34,11 +34,11 @@ public class Song
 
 	@RelatedTo(type = "CONTAINS_PART")
 	@Fetch
-	private List<SongPart> songParts;
+	private Set<SongPart> songParts;
 
 	public void addSongPart(SongPart songPart) {
 		if (songParts == null) {
-			songParts = new LinkedList<SongPart>();
+			songParts = new HashSet<>();
 		}
 		songParts.add(songPart);
 	}

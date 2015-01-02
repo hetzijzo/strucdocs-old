@@ -3,9 +3,10 @@ package org.musician.domain;
 import lombok.Data;
 import org.codehaus.jackson.annotate.JsonAutoDetect;
 import org.springframework.data.neo4j.annotation.GraphId;
+import org.springframework.data.neo4j.annotation.Indexed;
 import org.springframework.data.neo4j.annotation.NodeEntity;
+import org.springframework.data.neo4j.support.index.IndexType;
 
-import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
@@ -21,5 +22,6 @@ public class Genre
 	private Long id;
 
 	@NotNull
+	@Indexed(indexType = IndexType.LABEL)
 	private String genre;
 }

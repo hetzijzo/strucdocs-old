@@ -4,6 +4,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import org.springframework.data.neo4j.annotation.*;
+import org.springframework.util.Assert;
 
 import java.io.Serializable;
 
@@ -29,6 +30,9 @@ public class MusicianRole
 	private Instrument instrument;
 
 	public MusicianRole(Musician musician, Band band, Instrument instrument) {
+		Assert.notNull(musician);
+		Assert.notNull(band);
+		Assert.notNull(instrument);
 		this.musician = musician;
 		this.band = band;
 		this.instrument = instrument;

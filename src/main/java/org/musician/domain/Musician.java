@@ -17,7 +17,7 @@ import java.util.Set;
 @NodeEntity
 @JsonAutoDetect
 @Data
-@EqualsAndHashCode(of = "id")
+@EqualsAndHashCode(of = {"id", "username"})
 @ToString(exclude = {"roles"})
 public class Musician
 		implements Serializable {
@@ -28,13 +28,15 @@ public class Musician
 	private Long id;
 
 	@NotNull
-	@Indexed(indexName = "username", indexType = IndexType.FULLTEXT, unique = true)
+	@Indexed(indexType = IndexType.LABEL, unique = true)
 	private String username;
 
 	@NotNull
+	@Indexed(indexName = "musician.name", indexType = IndexType.FULLTEXT)
 	private String name;
 
 	@Email
+	@NotNull
 	private String email;
 
 	private LocalDate birthDate;
@@ -43,13 +45,13 @@ public class Musician
 
 	private String country;
 
-	private Set<Instrument> instruments;
+	private Set<Instrument> instruments = new HashSet<>();
 
 	@RelatedToVia(type = Relationship.PLAYS_IN)
 	@Fetch
 	private Set<MusicianRole> roles = new HashSet<>();
 
-	public MusicianRole playedIn(Band band, Instrument instrument) {
+	public MusicianRole playedIn(final Band band, final Instrument instrument) {
 		final MusicianRole role = new MusicianRole(this, band, instrument);
 		roles.add(role);
 		return role;

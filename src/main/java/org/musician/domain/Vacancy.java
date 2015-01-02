@@ -24,6 +24,4 @@ public class Vacancy
 
 	@NotNull
 	private VacancyType type;
-
-	private Integer age;
 }

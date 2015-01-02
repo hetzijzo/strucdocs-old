@@ -22,6 +22,6 @@ public class Lyric
 	private Long id;
 
 	@NotNull
-	@Indexed(indexName = "lyricText_Idx", indexType = IndexType.FULLTEXT)
+	@Indexed(indexName = "lyricText", indexType = IndexType.FULLTEXT)
 	private String text;
 }
