@@ -6,7 +6,6 @@ import org.musician.domain.chord.Chord;
 import org.musician.domain.chord.ChordAddition;
 import org.musician.domain.chord.ChordNote;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import static junit.framework.TestCase.assertTrue;

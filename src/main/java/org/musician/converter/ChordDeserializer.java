@@ -14,6 +14,6 @@ public class ChordDeserializer
 	@Override
 	public Chord deserialize(JsonParser jsonParser, DeserializationContext context)
 			throws IOException, JsonProcessingException {
-		return Chord.fromStringValue(jsonParser.getValueAsString());
+		return Chord.fromString(jsonParser.getValueAsString());
 	}
 }

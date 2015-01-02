@@ -26,6 +26,8 @@ import java.util.stream.Collectors;
 public class Chord
 		implements Serializable {
 
+	public static final String GROUNDNOTE_SEPERATOR = "/";
+
 	private static final long serialVersionUID = -5788157528932128761L;
 
 	@GraphId
@@ -36,10 +38,14 @@ public class Chord
 	private ChordNote chordNote;
 
 	@GraphProperty
-	private Set<ChordAddition> chordAdditions = new LinkedHashSet<>();
+	private ChordNote groundNote;
+
+	@GraphProperty
+	private final Set<ChordAddition> chordAdditions = new LinkedHashSet<>();
 
 	/* Transient fields */
 	private ChordNote transposedChordNote;
+	private ChordNote transposedGroundNote;
 
 	public Set<ChordAddition> getChordAdditions() {
 		return Collections.unmodifiableSet(chordAdditions);
@@ -53,31 +59,50 @@ public class Chord
 		return transposedChordNote == null ? chordNote : transposedChordNote;
 	}
 
+	public ChordNote getTransposedGroundNote() {
+		return transposedGroundNote == null ? groundNote : transposedGroundNote;
+	}
+
 	public void transpose(int steps) {
 		transposedChordNote = getTransposedChordNote().transpose(steps);
+
+		if (getTransposedGroundNote() != null) {
+			transposedGroundNote = getTransposedGroundNote().transpose(steps);
+		}
 	}
 
 	public boolean isTransposed() {
 		return getTransposedChordNote() != chordNote;
 	}
 
-	public static Chord fromStringValue(final String notationValue) {
-		ChordNote note = getHighestMatchingScore(ChordNote.class, notationValue);
+	public static Chord fromString(String chordString) {
+		ChordNote groundNote;
+		if (StringUtils.contains(chordString, GROUNDNOTE_SEPERATOR)) {
+			String groundNoteString = StringUtils.substringAfter(chordString, "/");
+			groundNote = getHighestMatchingScore(ChordNote.class, groundNoteString);
+			chordString = StringUtils.substringBefore(chordString, "/");
+		} else {
+			groundNote = null;
+		}
 
-		Chord chord = Chord.builder().chordNote(note).build();
+		ChordNote chordNote = getHighestMatchingScore(ChordNote.class, chordString);
 
-		String additionsValue = notationValue.substring(notationValue.indexOf(note.notation) + note.notation.length());
+		Chord chord = Chord.builder()
+				.chordNote(chordNote)
+				.groundNote(groundNote)
+				.build();
 
-		while (!additionsValue.isEmpty()) {
-			ChordAddition addition = getHighestMatchingScore(ChordAddition.class, additionsValue);
+		String chordAdditionalString = StringUtils.substringAfter(chordString, chordNote.notation);
+		while (!chordAdditionalString.isEmpty()) {
+			ChordAddition addition = getHighestMatchingScore(ChordAddition.class, chordAdditionalString);
 			chord.addChordAddition(addition);
-			additionsValue = additionsValue.substring(additionsValue.indexOf(addition.notation) + addition.notation.length());
+			chordAdditionalString = StringUtils.substringAfter(chordAdditionalString, addition.notation);
 		}
 
 		return chord;
 	}
 
-	private static <T extends Enum> T getHighestMatchingScore(Class<T> itemsClass, String stringValue) {
+	private static <T extends Enum> T getHighestMatchingScore(Class<T> itemsClass, final String stringValue) {
 		return getMatchingScores(itemsClass, stringValue).entrySet()
 				.stream()
 				.filter(e -> stringValue.indexOf(e.getKey().toString()) == 0)
@@ -86,7 +111,7 @@ public class Chord
 				.getKey();
 	}
 
-	private static <T extends Enum> Map<T, Double> getMatchingScores(Class<T> itemsClass, String stringValue) {
+	private static <T extends Enum> Map<T, Double> getMatchingScores(Class<T> itemsClass, final String stringValue) {
 		return Arrays.asList(itemsClass.getEnumConstants())
 				.stream()
 				.parallel()
@@ -103,6 +128,10 @@ public class Chord
 		StringBuilder sb = new StringBuilder();
 		sb.append(getTransposedChordNote().notation);
 		getChordAdditions().forEach(addition -> sb.append(addition.notation));
+		if (getTransposedGroundNote() != null) {
+			sb.append(GROUNDNOTE_SEPERATOR);
+			sb.append(getTransposedGroundNote());
+		}
 		return sb.toString();
 	}
 }
