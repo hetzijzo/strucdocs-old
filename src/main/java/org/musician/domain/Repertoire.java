@@ -1,6 +1,8 @@
 package org.musician.domain;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.experimental.Builder;
 import org.codehaus.jackson.annotate.JsonAutoDetect;
 import org.musician.domain.song.Song;
@@ -17,6 +19,8 @@ import java.io.Serializable;
 @JsonAutoDetect
 @Data
 @Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class Repertoire
 		implements Serializable {
 

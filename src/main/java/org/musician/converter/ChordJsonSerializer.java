@@ -9,7 +9,7 @@ import org.musician.domain.chord.Chord;
 
 import java.io.IOException;
 
-public class ChordSerializer
+public class ChordJsonSerializer
 		extends JsonSerializer<Chord> {
 
 	@Override

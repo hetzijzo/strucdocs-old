@@ -1,8 +1,6 @@
 package org.musician.domain;
 
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.ToString;
+import lombok.*;
 import lombok.experimental.Builder;
 import org.codehaus.jackson.annotate.JsonAutoDetect;
 import org.hibernate.validator.constraints.Email;
@@ -19,6 +17,8 @@ import java.util.Set;
 @JsonAutoDetect
 @Data
 @Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @EqualsAndHashCode(of = {"id", "username"})
 @ToString(exclude = {"roles"})
 public class Musician
@@ -50,9 +50,10 @@ public class Musician
 	private Set<Instrument> instruments = new HashSet<>();
 
 	@RelatedToVia(type = Relationship.PLAYS_IN)
+	@Fetch
 	private Set<MusicianRole> roles = new HashSet<>();
 
-	public MusicianRole playedIn(final Band band, final Instrument instrument) {
+	public MusicianRole playsIn(final Band band, final Instrument instrument) {
 		final MusicianRole role = new MusicianRole(this, band, instrument);
 		roles.add(role);
 		return role;

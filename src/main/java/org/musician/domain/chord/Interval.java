@@ -1,9 +1,9 @@
 package org.musician.domain.chord;
 
-public enum ChordAddition {
+public enum Interval {
+	second("2"),
 	minor("m"),
 	major("maj"),
-	second("2"),
 	fourth("4"),
 	fifth("5"),
 	sixth("6"),
@@ -19,7 +19,7 @@ public enum ChordAddition {
 
 	String notation;
 
-	private ChordAddition(String notation) {
+	private Interval(String notation) {
 		this.notation = notation;
 	}
 

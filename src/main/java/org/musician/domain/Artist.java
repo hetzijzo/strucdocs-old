@@ -1,8 +1,6 @@
 package org.musician.domain;
 
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.ToString;
+import lombok.*;
 import lombok.experimental.Builder;
 import org.codehaus.jackson.annotate.JsonAutoDetect;
 import org.codehaus.jackson.annotate.JsonIgnore;
@@ -15,13 +13,19 @@ import org.springframework.data.neo4j.annotation.RelatedTo;
 import org.springframework.data.neo4j.support.index.IndexType;
 
 import javax.validation.constraints.NotNull;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.Set;
 
 @NodeEntity
 @JsonAutoDetect
+@XmlRootElement
 @Data
 @Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @ToString(exclude = {"songs"})
 @EqualsAndHashCode(exclude = {"songs"})
 public class Artist
@@ -38,5 +42,6 @@ public class Artist
 
 	@RelatedTo(type = Relationship.PERFORMED_BY, direction = Direction.INCOMING)
 	@JsonIgnore
-	private Set<Song> songs;
+	@XmlTransient
+	private final Set<Song> songs = new HashSet<>();
 }

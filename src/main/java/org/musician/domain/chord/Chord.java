@@ -2,12 +2,15 @@ package org.musician.domain.chord;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 import lombok.experimental.Builder;
 import org.apache.commons.lang3.StringUtils;
-import org.musician.converter.ChordDeserializer;
-import org.musician.converter.ChordSerializer;
+import org.musician.converter.ChordJsonDeserializer;
+import org.musician.converter.ChordJsonSerializer;
+import org.musician.domain.Transposable;
 import org.springframework.data.neo4j.annotation.GraphId;
 import org.springframework.data.neo4j.annotation.GraphProperty;
 import org.springframework.data.neo4j.annotation.NodeEntity;
@@ -18,13 +21,15 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 @NodeEntity(partial = true)
-@JsonSerialize(using = ChordSerializer.class)
-@JsonDeserialize(using = ChordDeserializer.class)
+@JsonSerialize(using = ChordJsonSerializer.class)
+@JsonDeserialize(using = ChordJsonDeserializer.class)
 @Data
 @Builder
-@EqualsAndHashCode(exclude = {"transposedChordNote"})
+@NoArgsConstructor
+@AllArgsConstructor
+@EqualsAndHashCode(exclude = {"transposedNote", "transposedGroundNote"})
 public class Chord
-		implements Serializable {
+		implements Serializable, Transposable {
 
 	public static final String GROUNDNOTE_SEPERATOR = "/";
 
@@ -35,66 +40,66 @@ public class Chord
 
 	@NotNull
 	@GraphProperty
-	private ChordNote chordNote;
+	private Note note;
 
 	@GraphProperty
-	private ChordNote groundNote;
+	private Note groundNote;
 
 	@GraphProperty
-	private final Set<ChordAddition> chordAdditions = new LinkedHashSet<>();
+	private final Set<Interval> additions = new LinkedHashSet<>();
 
 	/* Transient fields */
-	private ChordNote transposedChordNote;
-	private ChordNote transposedGroundNote;
+	private Note transposedNote;
+	private Note transposedGroundNote;
 
-	public Set<ChordAddition> getChordAdditions() {
-		return Collections.unmodifiableSet(chordAdditions);
+	public Set<Interval> getAdditions() {
+		return Collections.unmodifiableSet(additions);
 	}
 
-	public void addChordAddition(ChordAddition chordAddition) {
-		this.chordAdditions.add(chordAddition);
+	public void addChordAddition(Interval interval) {
+		this.additions.add(interval);
 	}
 
-	public ChordNote getTransposedChordNote() {
-		return transposedChordNote == null ? chordNote : transposedChordNote;
+	public Note getTransposedNote() {
+		return transposedNote == null ? note : transposedNote;
 	}
 
-	public ChordNote getTransposedGroundNote() {
+	public Note getTransposedGroundNote() {
 		return transposedGroundNote == null ? groundNote : transposedGroundNote;
 	}
 
-	public void transpose(int steps) {
-		transposedChordNote = getTransposedChordNote().transpose(steps);
+	public void transpose(Scale scale, int steps) {
+		transposedNote = getTransposedNote().transpose(scale, steps);
 
 		if (getTransposedGroundNote() != null) {
-			transposedGroundNote = getTransposedGroundNote().transpose(steps);
+			transposedGroundNote = getTransposedGroundNote().transpose(scale, steps);
 		}
 	}
 
 	public boolean isTransposed() {
-		return getTransposedChordNote() != chordNote;
+		return getTransposedNote() != note;
 	}
 
 	public static Chord fromString(String chordString) {
-		ChordNote groundNote;
+		Note groundNote;
 		if (StringUtils.contains(chordString, GROUNDNOTE_SEPERATOR)) {
 			String groundNoteString = StringUtils.substringAfter(chordString, "/");
-			groundNote = getHighestMatchingScore(ChordNote.class, groundNoteString);
+			groundNote = getHighestMatchingScore(Note.class, groundNoteString);
 			chordString = StringUtils.substringBefore(chordString, "/");
 		} else {
 			groundNote = null;
 		}
 
-		ChordNote chordNote = getHighestMatchingScore(ChordNote.class, chordString);
+		Note note = getHighestMatchingScore(Note.class, chordString);
 
 		Chord chord = Chord.builder()
-				.chordNote(chordNote)
+				.note(note)
 				.groundNote(groundNote)
 				.build();
 
-		String chordAdditionalString = StringUtils.substringAfter(chordString, chordNote.notation);
+		String chordAdditionalString = StringUtils.substringAfter(chordString, note.notation);
 		while (!chordAdditionalString.isEmpty()) {
-			ChordAddition addition = getHighestMatchingScore(ChordAddition.class, chordAdditionalString);
+			Interval addition = getHighestMatchingScore(Interval.class, chordAdditionalString);
 			chord.addChordAddition(addition);
 			chordAdditionalString = StringUtils.substringAfter(chordAdditionalString, addition.notation);
 		}
@@ -126,8 +131,8 @@ public class Chord
 	@Override
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
-		sb.append(getTransposedChordNote().notation);
-		getChordAdditions().forEach(addition -> sb.append(addition.notation));
+		sb.append(getTransposedNote().notation);
+		getAdditions().forEach(addition -> sb.append(addition.notation));
 		if (getTransposedGroundNote() != null) {
 			sb.append(GROUNDNOTE_SEPERATOR);
 			sb.append(getTransposedGroundNote());

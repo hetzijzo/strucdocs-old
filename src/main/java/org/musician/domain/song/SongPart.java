@@ -1,6 +1,9 @@
 package org.musician.domain.song;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.experimental.Builder;
 import org.codehaus.jackson.annotate.JsonAutoDetect;
 import org.neo4j.graphdb.Direction;
 import org.springframework.data.neo4j.annotation.Fetch;
@@ -18,6 +21,9 @@ import java.util.Set;
 @NodeEntity
 @JsonAutoDetect
 @Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class SongPart
 		implements Serializable {
 

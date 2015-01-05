@@ -1,5 +1,6 @@
-package org.musician.component.generatedocument;
+package org.musician.component.document;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.itextpdf.text.*;
 import com.itextpdf.text.pdf.BarcodeQRCode;
 import com.itextpdf.text.pdf.PdfDocument;
@@ -12,10 +13,12 @@ import org.springframework.stereotype.Service;
 import java.io.OutputStream;
 
 @Service
-public class GenerateDocumentComponentImpl
-		implements GenerateDocumentComponent {
+public class DocumentComponentImpl
+		implements DocumentComponent {
 
 	private static final Chunk TAB = new Chunk(new VerticalPositionMark(), 200, true);
+
+	private ObjectMapper objectMapper;
 
 	@Override
 	public void generateDocumentToOutputStream(OutputStream outputStream, Song song)
@@ -36,7 +39,7 @@ public class GenerateDocumentComponentImpl
 
 		addEmptyLine(new Paragraph(), 2);
 
-		for (SongPart part : song.getSongParts()) {
+		for (SongPart part : song.getParts()) {
 			document.add(new Paragraph(part.getType().toString(), new Font(Font.FontFamily.TIMES_ROMAN, 10, Font.NORMAL)));
 			part.getLines().stream().forEach(l -> {
 				try {

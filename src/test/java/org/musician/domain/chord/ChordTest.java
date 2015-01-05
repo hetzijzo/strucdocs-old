@@ -17,13 +17,13 @@ public class ChordTest {
 			throws Exception {
 		Chord chord = Chord.fromString("C#maj7");
 		assertThat(chord, notNullValue());
-		assertThat(chord.getChordNote(), is(ChordNote.CSharp));
+		assertThat(chord.getNote(), is(Note.CSharp));
 
-		Set<ChordAddition> chordAdditions = chord.getChordAdditions();
-		assertThat(chordAdditions.size(), is(2));
-		Iterator<ChordAddition> chordAdditionIterator = chordAdditions.iterator();
-		assertThat(chordAdditionIterator.next(), is(ChordAddition.major));
-		assertThat(chordAdditionIterator.next(), is(ChordAddition.seventh));
+		Set<Interval> intervals = chord.getAdditions();
+		assertThat(intervals.size(), is(2));
+		Iterator<Interval> chordAdditionIterator = intervals.iterator();
+		assertThat(chordAdditionIterator.next(), is(Interval.major));
+		assertThat(chordAdditionIterator.next(), is(Interval.seventh));
 	}
 
 	@Test
@@ -31,12 +31,12 @@ public class ChordTest {
 			throws Exception {
 		Chord chord = Chord.fromString("Bbsus4");
 		assertThat(chord, notNullValue());
-		assertThat(chord.getChordNote(), is(ChordNote.BFlat));
+		assertThat(chord.getNote(), is(Note.BFlat));
 
-		Set<ChordAddition> chordAdditions = chord.getChordAdditions();
-		assertThat(chordAdditions.size(), is(1));
-		Iterator<ChordAddition> chordAdditionIterator = chordAdditions.iterator();
-		assertThat(chordAdditionIterator.next(), is(ChordAddition.sus4));
+		Set<Interval> intervals = chord.getAdditions();
+		assertThat(intervals.size(), is(1));
+		Iterator<Interval> chordAdditionIterator = intervals.iterator();
+		assertThat(chordAdditionIterator.next(), is(Interval.sus4));
 	}
 
 	@Test
@@ -44,12 +44,12 @@ public class ChordTest {
 			throws Exception {
 		Chord chord = Chord.fromString("Am");
 		assertThat(chord, notNullValue());
-		assertThat(chord.getChordNote(), is(ChordNote.A));
+		assertThat(chord.getNote(), is(Note.A));
 
-		Set<ChordAddition> chordAdditions = chord.getChordAdditions();
-		assertThat(chordAdditions.size(), is(1));
-		Iterator<ChordAddition> chordAdditionIterator = chordAdditions.iterator();
-		assertThat(chordAdditionIterator.next(), is(ChordAddition.minor));
+		Set<Interval> intervals = chord.getAdditions();
+		assertThat(intervals.size(), is(1));
+		Iterator<Interval> chordAdditionIterator = intervals.iterator();
+		assertThat(chordAdditionIterator.next(), is(Interval.minor));
 	}
 
 	@Test
@@ -57,14 +57,14 @@ public class ChordTest {
 			throws Exception {
 		Chord chord = Chord.fromString("Ammaj7");
 		assertThat(chord, notNullValue());
-		assertThat(chord.getChordNote(), is(ChordNote.A));
+		assertThat(chord.getNote(), is(Note.A));
 
-		Set<ChordAddition> chordAdditions = chord.getChordAdditions();
-		assertThat(chordAdditions.size(), is(3));
-		Iterator<ChordAddition> chordAdditionIterator = chordAdditions.iterator();
-		assertThat(chordAdditionIterator.next(), is(ChordAddition.minor));
-		assertThat(chordAdditionIterator.next(), is(ChordAddition.major));
-		assertThat(chordAdditionIterator.next(), is(ChordAddition.seventh));
+		Set<Interval> intervals = chord.getAdditions();
+		assertThat(intervals.size(), is(3));
+		Iterator<Interval> chordAdditionIterator = intervals.iterator();
+		assertThat(chordAdditionIterator.next(), is(Interval.minor));
+		assertThat(chordAdditionIterator.next(), is(Interval.major));
+		assertThat(chordAdditionIterator.next(), is(Interval.seventh));
 	}
 
 	@Test
@@ -72,23 +72,23 @@ public class ChordTest {
 			throws Exception {
 		Chord chord = Chord.fromString("Dm7b5");
 		assertThat(chord, notNullValue());
-		assertThat(chord.getChordNote(), is(ChordNote.D));
+		assertThat(chord.getNote(), is(Note.D));
 
-		Set<ChordAddition> chordAdditions = chord.getChordAdditions();
-		assertThat(chordAdditions.size(), is(3));
-		Iterator<ChordAddition> chordAdditionIterator = chordAdditions.iterator();
-		assertThat(chordAdditionIterator.next(), is(ChordAddition.minor));
-		assertThat(chordAdditionIterator.next(), is(ChordAddition.seventh));
-		assertThat(chordAdditionIterator.next(), is(ChordAddition.dim5));
+		Set<Interval> intervals = chord.getAdditions();
+		assertThat(intervals.size(), is(3));
+		Iterator<Interval> chordAdditionIterator = intervals.iterator();
+		assertThat(chordAdditionIterator.next(), is(Interval.minor));
+		assertThat(chordAdditionIterator.next(), is(Interval.seventh));
+		assertThat(chordAdditionIterator.next(), is(Interval.dim5));
 	}
 
 	@Test
 	public void testTransposeAminor1()
 			throws Exception {
 		Chord chord = Chord.fromString("Am");
-		chord.transpose(1);
+		chord.transpose(Scale.Up, 1);
 
-		assertThat(chord.getTransposedChordNote(), is(ChordNote.ASharp));
+		assertThat(chord.getTransposedNote(), is(Note.ASharp));
 		assertThat(chord.isTransposed(), is(true));
 	}
 
@@ -96,20 +96,20 @@ public class ChordTest {
 	public void testTransposeAminorMin4()
 			throws Exception {
 		Chord chord = Chord.fromString("Am");
-		chord.transpose(-4);
+		chord.transpose(Scale.Down, 4);
 
-		ChordNote transposedChord = chord.getTransposedChordNote();
-		assertThat(transposedChord, is(ChordNote.F));
+		Note transposedChord = chord.getTransposedNote();
+		assertThat(transposedChord, is(Note.F));
 	}
 
 	@Test
 	public void testTranspose_UndoTranspose()
 			throws Exception {
 		Chord chord = Chord.fromString("Am");
-		chord.transpose(2);
-		chord.transpose(-2);
+		chord.transpose(Scale.getScale(2), 2);
+		chord.transpose(Scale.getScale(-2), 2);
 
-		assertThat(chord.getTransposedChordNote(), is(ChordNote.A));
+		assertThat(chord.getTransposedNote(), is(Note.A));
 		assertThat(chord.isTransposed(), is(false));
 	}
 
@@ -117,11 +117,11 @@ public class ChordTest {
 	public void testTranspose_UndoTransposeMultipleSteps()
 			throws Exception {
 		Chord chord = Chord.fromString("Am");
-		chord.transpose(2);
-		chord.transpose(-1);
-		chord.transpose(-1);
+		chord.transpose(Scale.Up, 2);
+		chord.transpose(Scale.Down, 1);
+		chord.transpose(Scale.Down, 1);
 
-		assertThat(chord.getTransposedChordNote(), is(ChordNote.A));
+		assertThat(chord.getTransposedNote(), is(Note.A));
 		assertThat(chord.isTransposed(), is(false));
 	}
 
@@ -130,8 +130,8 @@ public class ChordTest {
 			throws Exception {
 		Chord chord = Chord.fromString("Em/G");
 
-		assertThat(chord.getTransposedChordNote(), is(ChordNote.E));
-		assertThat(chord.getGroundNote(), is(ChordNote.G));
+		assertThat(chord.getTransposedNote(), is(Note.E));
+		assertThat(chord.getGroundNote(), is(Note.G));
 		assertThat(chord.isTransposed(), is(false));
 
 		assertThat(chord.toString(), equalTo("Em/G"));

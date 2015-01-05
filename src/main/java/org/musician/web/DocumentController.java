@@ -1,7 +1,7 @@
 package org.musician.web;
 
 import com.itextpdf.text.DocumentException;
-import org.musician.component.generatedocument.GenerateDocumentComponent;
+import org.musician.component.document.DocumentComponent;
 import org.musician.domain.song.Song;
 import org.musician.repository.SongRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +23,7 @@ public class DocumentController {
 	private SongRepository songRepository;
 
 	@Autowired
-	private GenerateDocumentComponent generateDocumentComponent;
+	private DocumentComponent documentComponent;
 
 	@RequestMapping(value = "/songs/{songId}", method = RequestMethod.GET)
 	public ResponseEntity<Void> getDocument(HttpServletResponse servletResponse, @PathVariable("songId") Long songId)
@@ -33,7 +33,7 @@ public class DocumentController {
 			return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
 		}
 
-		generateDocumentComponent.generateDocumentToOutputStream(servletResponse.getOutputStream(), song);
+		documentComponent.generateDocumentToOutputStream(servletResponse.getOutputStream(), song);
 
 		servletResponse.setContentType("application/pdf");
 		servletResponse.setHeader("Content-Disposition", String.format("inline; filename=\"%s.pdf\"", song.getTitle()));

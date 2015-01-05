@@ -1,6 +1,8 @@
 package org.musician.domain;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.experimental.Builder;
 import org.codehaus.jackson.annotate.JsonAutoDetect;
 import org.codehaus.jackson.annotate.JsonIgnore;
@@ -13,6 +15,8 @@ import java.io.Serializable;
 @JsonAutoDetect
 @Data
 @Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class Vacancy
 		implements Serializable {
 

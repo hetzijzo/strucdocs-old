@@ -8,7 +8,7 @@ import org.musician.domain.chord.Chord;
 
 import java.io.IOException;
 
-public class ChordDeserializer
+public class ChordJsonDeserializer
 		extends JsonDeserializer<Chord> {
 
 	@Override
