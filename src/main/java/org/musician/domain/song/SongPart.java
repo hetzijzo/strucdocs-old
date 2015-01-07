@@ -5,6 +5,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Builder;
 import org.codehaus.jackson.annotate.JsonAutoDetect;
+import org.musician.domain.Transposable;
+import org.musician.domain.chord.Scale;
 import org.neo4j.graphdb.Direction;
 import org.springframework.data.neo4j.annotation.Fetch;
 import org.springframework.data.neo4j.annotation.GraphId;
@@ -25,7 +27,7 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 public class SongPart
-		implements Serializable {
+		implements SongComponent, Transposable, Serializable {
 
 	private static final long serialVersionUID = 3146634301775003439L;
 
@@ -45,5 +47,15 @@ public class SongPart
 
 	public void addLine(SongLine line) {
 		this.lines.add(line);
+	}
+
+	@Override
+	public void transpose(Scale scale, int steps) {
+		getLines().parallelStream().forEach(line -> line.transpose(scale, steps));
+	}
+
+	@Override
+	public boolean isTransposed() {
+		return getLines().stream().anyMatch(Transposable::isTransposed);
 	}
 }

@@ -43,7 +43,7 @@ public class DocumentComponentImpl
 			document.add(new Paragraph(part.getType().toString(), new Font(Font.FontFamily.TIMES_ROMAN, 10, Font.NORMAL)));
 			part.getLines().stream().forEach(l -> {
 				try {
-					document.add(new Paragraph(l.getChord().toString()));
+					document.add(new Paragraph(l.getChords().toArray().toString()));
 					document.add(new Paragraph(l.getLyric().getText()));
 				} catch (DocumentException e) {
 					e.printStackTrace();

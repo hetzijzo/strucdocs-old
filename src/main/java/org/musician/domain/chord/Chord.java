@@ -68,6 +68,7 @@ public class Chord
 		return transposedGroundNote == null ? groundNote : transposedGroundNote;
 	}
 
+	@Override
 	public void transpose(Scale scale, int steps) {
 		transposedNote = getTransposedNote().transpose(scale, steps);
 
@@ -76,6 +77,7 @@ public class Chord
 		}
 	}
 
+	@Override
 	public boolean isTransposed() {
 		return getTransposedNote() != note;
 	}

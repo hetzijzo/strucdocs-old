@@ -26,7 +26,7 @@ import java.util.Set;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Song
-		implements Serializable, Transposable {
+		implements SongComponent, Transposable, Serializable {
 
 	private static final long serialVersionUID = -5894730035637748152L;
 
@@ -69,18 +69,14 @@ public class Song
 	}
 
 	@Override
-	public boolean isTransposed() {
-		return getTransposedKey() != key;
-	}
-
-	@Override
 	public void transpose(Scale scale, int steps) {
 		key = getTransposedKey().transpose(scale, steps);
 
-		getParts().parallelStream().forEach(
-				part -> part.getLines().parallelStream().forEach(
-						line -> line.getChord().transpose(scale, steps)
-				)
-		);
+		getParts().parallelStream().forEach(part -> part.transpose(scale, steps));
+	}
+
+	@Override
+	public boolean isTransposed() {
+		return getTransposedKey() != key;
 	}
 }
