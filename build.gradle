@@ -1,0 +1,68 @@
+buildscript {
+    repositories {
+        jcenter()
+        maven { url "https://repo.spring.io/plugins-release" }
+    }
+    dependencies {
+        classpath("org.asciidoctor:asciidoctor-gradle-plugin:0.7.0")
+        classpath("io.spring.gradle:docbook-reference-plugin:0.3.0")
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'idea'
+apply plugin: 'eclipse'
+apply plugin: 'spring-boot'
+apply plugin: 'application'
+apply plugin: 'asciidoctor'
+apply plugin: 'docbook-reference'
+apply plugin: 'build-announcements'
+apply plugin: 'build-dashboard'
+
+mainClassName='org.musician.MusicianApplication'
+
+repositories {
+    mavenLocal()
+    mavenCentral()
+    jcenter()
+
+    maven() {
+        url 'http://m2.neo4j.org/content/repositories/releases'
+    }
+}
+
+configurations {
+//    compile.exclude module: "spring-boot-starter-tomcat"
+}
+
+dependencies {
+    compile("org.springframework.boot:spring-boot-starter-actuator")
+    compile("org.springframework.boot:spring-boot-starter-web")
+    compile("org.springframework.boot:spring-boot-starter-data-rest")
+//    compile("org.springframework.boot:spring-boot-starter-undertow")
+    compile("org.springframework.hateoas:spring-hateoas:0.16.0.RELEASE")
+
+    compile("com.fasterxml.jackson.dataformat:jackson-dataformat-xml:2.5.0")
+
+    compile("org.springframework.data:spring-data-neo4j:3.2.2.RELEASE")
+    compile("com.itextpdf:itextpdf:5.5.4")
+    compile("org.projectlombok:lombok:1.14.2")
+    compile("org.apache.commons:commons-lang3:3.3.2")
+    compile("org.asciidoctor:asciidoctorj:1.5.2")
+    compile("org.codehaus.jackson:jackson-mapper-asl:1.9.13")
+    compile("com.jayway.jsonpath:json-path:0.9.1")
+
+    compile("commons-io:commons-io:2.4")
+
+    compile("org.jsoup:jsoup:1.7.2")
+
+    testCompile("junit:junit:${junitVersion}")
+    testCompile("org.hamcrest:hamcrest-all:1.1")
+    testCompile("org.mockito:mockito-core:1.9.0")
+    testCompile("org.springframework.boot:spring-boot-starter-test")
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '2.1'
+}

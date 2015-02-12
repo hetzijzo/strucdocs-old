@@ -2,3 +2,5 @@
 /.idea
 /musician.db
 /*.iml
+/frontend/build
+/build

@@ -70,9 +70,10 @@ public class ChordTest {
 	@Test
 	public void testDminorMajor7b5()
 			throws Exception {
-		Chord chord = Chord.fromString("Dm7b5");
+		Chord chord = Chord.fromString("Dm7b5/Bb");
 		assertThat(chord, notNullValue());
 		assertThat(chord.getNote(), is(Note.D));
+		assertThat(chord.getGroundNote(), is(Note.BFlat));
 
 		Set<Interval> intervals = chord.getAdditions();
 		assertThat(intervals.size(), is(3));

@@ -86,13 +86,13 @@ public class Chord
 		Note groundNote;
 		if (StringUtils.contains(chordString, GROUNDNOTE_SEPERATOR)) {
 			String groundNoteString = StringUtils.substringAfter(chordString, "/");
-			groundNote = getHighestMatchingScore(Note.class, groundNoteString);
+			groundNote = getHighestMatching(Note.class, groundNoteString);
 			chordString = StringUtils.substringBefore(chordString, "/");
 		} else {
 			groundNote = null;
 		}
 
-		Note note = getHighestMatchingScore(Note.class, chordString);
+		Note note = getHighestMatching(Note.class, chordString);
 
 		Chord chord = Chord.builder()
 				.note(note)
@@ -101,7 +101,7 @@ public class Chord
 
 		String chordAdditionalString = StringUtils.substringAfter(chordString, note.notation);
 		while (!chordAdditionalString.isEmpty()) {
-			Interval addition = getHighestMatchingScore(Interval.class, chordAdditionalString);
+			Interval addition = getHighestMatching(Interval.class, chordAdditionalString);
 			chord.addChordAddition(addition);
 			chordAdditionalString = StringUtils.substringAfter(chordAdditionalString, addition.notation);
 		}
@@ -109,7 +109,7 @@ public class Chord
 		return chord;
 	}
 
-	private static <T extends Enum> T getHighestMatchingScore(Class<T> itemsClass, final String stringValue) {
+	private static <T extends Enum> T getHighestMatching(Class<T> itemsClass, final String stringValue) {
 		return getMatchingScores(itemsClass, stringValue).entrySet()
 				.stream()
 				.filter(e -> stringValue.indexOf(e.getKey().toString()) == 0)
@@ -121,9 +121,7 @@ public class Chord
 	private static <T extends Enum> Map<T, Double> getMatchingScores(Class<T> itemsClass, final String stringValue) {
 		return Arrays.asList(itemsClass.getEnumConstants())
 				.stream()
-				.parallel()
 				.filter(item -> stringValue.contains(item.toString()))
-				.sequential()
 				.collect(Collectors.toMap(
 						item -> item,
 						item -> StringUtils.getJaroWinklerDistance(item.toString(), stringValue)

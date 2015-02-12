@@ -9,6 +9,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.List;
 import java.util.function.Predicate;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
@@ -22,9 +23,9 @@ public class ImportComponentTextImpl
 		InputStream inputStream = ImportComponentTextImpl.class.getResourceAsStream("/" + songUrl);
 		BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
 
-		bufferedReader.lines()
-				.map(line -> detectTypeOfLine(line)).collect(Collectors.toList());
-		//.forEach(line -> detectTypeOfLine(line));
+        List<Class<? extends SongComponent>> collect = bufferedReader.lines()
+                .map(line -> detectTypeOfLine(line)).collect(Collectors.toList());
+        //.forEach(line -> detectTypeOfLine(line));
 
 
 		return null;
