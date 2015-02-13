@@ -1,26 +1,18 @@
-buildscript {
-    repositories {
-        jcenter()
-        maven { url "https://repo.spring.io/plugins-release" }
-    }
-    dependencies {
-        classpath("org.asciidoctor:asciidoctor-gradle-plugin:0.7.0")
-        classpath("io.spring.gradle:docbook-reference-plugin:0.3.0")
-        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
-    }
-}
-
 apply plugin: 'java'
+apply plugin: 'jacoco'
 apply plugin: 'idea'
 apply plugin: 'eclipse'
 apply plugin: 'spring-boot'
 apply plugin: 'application'
-apply plugin: 'asciidoctor'
-apply plugin: 'docbook-reference'
-apply plugin: 'build-announcements'
-apply plugin: 'build-dashboard'
+//apply plugin: 'war'
 
-mainClassName='org.musician.MusicianApplication'
+//apply plugin: 'checkstyle'
+//apply plugin: 'asciidoctor'
+//apply plugin: 'docbook-reference'
+//apply plugin: 'build-dashboard'
+//apply plugin: 'project-report'
+
+mainClassName='com.strucdocs.StrucDocsApplication'
 
 repositories {
     mavenLocal()
@@ -32,15 +24,11 @@ repositories {
     }
 }
 
-configurations {
-//    compile.exclude module: "spring-boot-starter-tomcat"
-}
-
 dependencies {
     compile("org.springframework.boot:spring-boot-starter-actuator")
-    compile("org.springframework.boot:spring-boot-starter-web")
     compile("org.springframework.boot:spring-boot-starter-data-rest")
-//    compile("org.springframework.boot:spring-boot-starter-undertow")
+//    compile("org.springframework.boot:spring-boot-starter-security")
+    compile("org.springframework.boot:spring-boot-starter-web")
     compile("org.springframework.hateoas:spring-hateoas:0.16.0.RELEASE")
 
     compile("com.fasterxml.jackson.dataformat:jackson-dataformat-xml:2.5.0")
@@ -61,6 +49,36 @@ dependencies {
     testCompile("org.hamcrest:hamcrest-all:1.1")
     testCompile("org.mockito:mockito-core:1.9.0")
     testCompile("org.springframework.boot:spring-boot-starter-test")
+}
+
+//asciidoctor {
+//    backend = 'docbook5'
+//    options = [
+//            eruby : 'erubis',
+//            attributes : [
+//                    doctype : 'book',
+//                    revnumber : project.version,
+//                    docinfo: ""
+//            ]
+//    ]
+//}
+//
+//reference {
+//    sourceDir = asciidoctor.outputDir
+//    pdfFilename = "musician.pdf"
+//    epubFilename = "musician.epub"
+//}
+
+buildscript {
+    repositories {
+        jcenter()
+        maven { url "https://repo.spring.io/plugins-release" }
+    }
+    dependencies {
+        classpath("org.asciidoctor:asciidoctor-gradle-plugin:0.7.0")
+        classpath("io.spring.gradle:docbook-reference-plugin:0.3.0")
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+    }
 }
 
 task wrapper(type: Wrapper) {
