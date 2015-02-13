@@ -1,6 +1,6 @@
 /target
 /.idea
-/musician.db
+/strucdocs.db
 /*.iml
 /frontend/build
 /build
