@@ -1,10 +1,10 @@
 package com.strucdocs.component.transpose;
 
-import org.junit.Test;
 import com.strucdocs.domain.chord.Chord;
 import com.strucdocs.domain.chord.Interval;
 import com.strucdocs.domain.chord.Note;
 import com.strucdocs.domain.chord.Scale;
+import org.junit.Test;
 
 import static junit.framework.TestCase.assertTrue;
 import static org.junit.Assert.assertEquals;

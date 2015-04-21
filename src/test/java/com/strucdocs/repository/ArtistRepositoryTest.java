@@ -2,6 +2,7 @@ package com.strucdocs.repository;
 
 import com.strucdocs.StrucDocsApplication;
 import com.strucdocs.domain.Artist;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Value;
@@ -24,6 +25,7 @@ public class ArtistRepositoryTest {
     private int port;
 
     @Test
+    @Ignore
     public void testFindAll()
             throws Exception {
         System.out.println("Running on port " + port);

@@ -1,15 +1,15 @@
 package com.strucdocs.domain.song;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.experimental.Builder;
-import org.codehaus.jackson.annotate.JsonAutoDetect;
 import com.strucdocs.domain.Artist;
 import com.strucdocs.domain.Relationship;
 import com.strucdocs.domain.Transposable;
 import com.strucdocs.domain.chord.Note;
 import com.strucdocs.domain.chord.Scale;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.experimental.Builder;
+import org.codehaus.jackson.annotate.JsonAutoDetect;
 import org.springframework.data.neo4j.annotation.*;
 import org.springframework.data.neo4j.support.index.IndexType;
 

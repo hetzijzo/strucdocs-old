@@ -1,12 +1,12 @@
 package com.strucdocs.domain.song;
 
+import com.strucdocs.domain.Transposable;
+import com.strucdocs.domain.chord.Scale;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Builder;
 import org.codehaus.jackson.annotate.JsonAutoDetect;
-import com.strucdocs.domain.Transposable;
-import com.strucdocs.domain.chord.Scale;
 import org.neo4j.graphdb.Direction;
 import org.springframework.data.neo4j.annotation.Fetch;
 import org.springframework.data.neo4j.annotation.GraphId;

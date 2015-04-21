@@ -1,15 +1,15 @@
 package com.strucdocs.domain.song;
 
 import com.fasterxml.jackson.annotation.JsonUnwrapped;
+import com.strucdocs.domain.Transposable;
+import com.strucdocs.domain.chord.Chord;
+import com.strucdocs.domain.chord.Scale;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Builder;
 import org.apache.commons.lang3.StringUtils;
 import org.codehaus.jackson.annotate.JsonAutoDetect;
-import com.strucdocs.domain.Transposable;
-import com.strucdocs.domain.chord.Chord;
-import com.strucdocs.domain.chord.Scale;
 import org.neo4j.graphdb.Direction;
 import org.springframework.data.neo4j.annotation.Fetch;
 import org.springframework.data.neo4j.annotation.GraphId;

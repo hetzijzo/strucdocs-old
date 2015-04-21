@@ -1,9 +1,9 @@
 package com.strucdocs.component.importer;
 
-import org.junit.Test;
 import com.strucdocs.domain.chord.Chord;
 import com.strucdocs.domain.song.Song;
 import com.strucdocs.domain.song.SongLine;
+import org.junit.Test;
 
 import java.util.Set;
 

@@ -2,15 +2,15 @@ package com.strucdocs.domain.chord;
 
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.strucdocs.converter.ChordJsonDeserializer;
+import com.strucdocs.converter.ChordJsonSerializer;
+import com.strucdocs.domain.Transposable;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Builder;
 import org.apache.commons.lang3.StringUtils;
-import com.strucdocs.converter.ChordJsonDeserializer;
-import com.strucdocs.converter.ChordJsonSerializer;
-import com.strucdocs.domain.Transposable;
 import org.springframework.data.neo4j.annotation.GraphId;
 import org.springframework.data.neo4j.annotation.GraphProperty;
 import org.springframework.data.neo4j.annotation.NodeEntity;

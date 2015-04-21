@@ -1,7 +1,7 @@
 package com.strucdocs.component.importer;
 
-import org.junit.Test;
 import com.strucdocs.domain.song.Song;
+import org.junit.Test;
 
 public class ImportComponentTextImplTest {
 

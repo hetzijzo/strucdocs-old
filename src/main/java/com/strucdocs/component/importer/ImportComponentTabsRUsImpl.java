@@ -1,10 +1,10 @@
 package com.strucdocs.component.importer;
 
+import com.strucdocs.domain.song.Song;
+import com.strucdocs.domain.song.SongLine;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
-import com.strucdocs.domain.song.Song;
-import com.strucdocs.domain.song.SongLine;
 
 import java.io.IOException;
 

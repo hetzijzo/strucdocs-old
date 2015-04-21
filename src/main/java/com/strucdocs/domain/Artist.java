@@ -1,10 +1,10 @@
 package com.strucdocs.domain;
 
+import com.strucdocs.domain.song.Song;
 import lombok.*;
 import lombok.experimental.Builder;
 import org.codehaus.jackson.annotate.JsonAutoDetect;
 import org.codehaus.jackson.annotate.JsonIgnore;
-import com.strucdocs.domain.song.Song;
 import org.neo4j.graphdb.Direction;
 import org.springframework.data.neo4j.annotation.GraphId;
 import org.springframework.data.neo4j.annotation.Indexed;

@@ -1,8 +1,8 @@
 package com.strucdocs.domain;
 
+import com.strucdocs.domain.song.Song;
 import lombok.Data;
 import org.codehaus.jackson.annotate.JsonAutoDetect;
-import com.strucdocs.domain.song.Song;
 import org.springframework.data.neo4j.annotation.GraphId;
 
 import javax.validation.constraints.NotNull;
