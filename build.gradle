@@ -1,17 +1,16 @@
-apply plugin: 'java'
-apply plugin: 'jacoco'
-apply plugin: 'idea'
-apply plugin: 'eclipse'
-apply plugin: 'spring-boot'
-apply plugin: 'application'
-apply plugin: 'docker'
-//apply plugin: 'war'
-
-//apply plugin: 'checkstyle'
 //apply plugin: 'asciidoctor'
-//apply plugin: 'docbook-reference'
+apply plugin: 'application'
 //apply plugin: 'build-dashboard'
+//apply plugin: 'checkstyle'
+// apply plugin: 'docbook-reference'
+apply plugin: 'docker'
+apply plugin: 'eclipse'
+apply plugin: 'idea'
+apply plugin: 'io.spring.dependency-management'
+apply plugin: 'jacoco'
+apply plugin: 'java'
 //apply plugin: 'project-report'
+apply plugin: 'spring-boot'
 
 mainClassName = 'com.strucdocs.StrucDocsApplication'
 
@@ -20,31 +19,51 @@ configurations {
     compile.extendsFrom provided
 }
 
+buildscript {
+    repositories {
+        mavenCentral()
+        jcenter()
+    }
+    dependencies {
+        classpath("se.transmode.gradle:gradle-docker:${gradleDockerVersion}")
+        //classpath("org.asciidoctor:asciidoctor-gradle-plugin:${asciiDoctorGradlePluginVersion}")
+        //classpath("io.spring.gradle:docbook-reference-plugin:${docbookReferencePluginVersion}")
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+        classpath("io.spring.gradle:dependency-management-plugin:${springDependencyManagementVersion}")
+    }
+}
+
 dependencies {
+    compile("com.fasterxml.jackson.dataformat:jackson-dataformat-xml")
+    compile("com.itextpdf:itextpdf:${itextPdfVersion}")
+    compile("com.jayway.jsonpath:json-path:0.9.1")
+    compile("com.vaadin:vaadin-spring-boot-starter:${vaadinBootStarterVersion}")
+    compile("commons-io:commons-io")
+    compile("org.apache.commons:commons-lang3")
+    compile("org.asciidoctor:asciidoctorj:${asciiDoctorVersion}")
+    compile("org.codehaus.jackson:jackson-mapper-asl")
+    compile("org.eclipse.jetty.aggregate:jetty-all:9.0.6.v20130930")
+    compile("org.jsoup:jsoup:${jsoupVersion}")
     compile("org.springframework.boot:spring-boot-starter-actuator")
     compile("org.springframework.boot:spring-boot-starter-data-rest")
-    //compile("org.springframework.boot:spring-boot-starter-security")
+    compile("org.springframework.boot:spring-boot-starter-hateoas")
+    compile("org.springframework.boot:spring-boot-starter-remote-shell")
+    compile("org.springframework.boot:spring-boot-starter-security")
     compile("org.springframework.boot:spring-boot-starter-web")
-    compile("org.springframework.hateoas:spring-hateoas:0.16.0.RELEASE")
+    compile("org.springframework.data:spring-data-neo4j:${springDataNeo4jVersion}")
 
-    compile("com.fasterxml.jackson.dataformat:jackson-dataformat-xml:2.5.0")
+    provided("org.projectlombok:lombok:${lombokVersion}")
 
-    compile("org.springframework.data:spring-data-neo4j:3.2.2.RELEASE")
-    compile("com.itextpdf:itextpdf:5.5.4")
-    compile("org.apache.commons:commons-lang3:3.3.2")
-    compile("org.asciidoctor:asciidoctorj:1.5.2")
-    compile("org.codehaus.jackson:jackson-mapper-asl:1.9.13")
-    compile("com.jayway.jsonpath:json-path:0.9.1")
-    compile("commons-io:commons-io:2.4")
-    compile("org.jsoup:jsoup:1.7.2")
-    compile("org.eclipse.jetty.aggregate:jetty-all:9.0.6.v20130930")
-
-    provided("org.projectlombok:lombok:1.14.2")
-
-    testCompile("junit:junit:${junitVersion}")
-    testCompile("org.hamcrest:hamcrest-all:1.1")
-    testCompile("org.mockito:mockito-core:1.9.0")
+    testCompile("junit:junit")
+    testCompile("org.hamcrest:hamcrest-all")
+    testCompile("org.mockito:mockito-core")
     testCompile("org.springframework.boot:spring-boot-starter-test")
+}
+
+dependencyManagement {
+    imports {
+        mavenBom "com.vaadin:vaadin-bom:${vaadinBomVersion}"
+    }
 }
 
 distDocker {
@@ -83,23 +102,14 @@ idea {
     }
 }
 
-buildscript {
-    repositories {
-        jcenter()
-//        maven {
-//            url "https://repo.spring.io/plugins-release"
-//        }
-    }
-    dependencies {
-        classpath("se.transmode.gradle:gradle-docker:1.2")
-        //classpath("org.asciidoctor:asciidoctor-gradle-plugin:0.7.0")
-        //classpath("io.spring.gradle:docbook-reference-plugin:0.3.0")
-        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+eclipse {
+    classpath {
+        containers.remove('org.eclipse.jdt.launching.JRE_CONTAINER')
+        containers 'org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8'
     }
 }
 
 repositories {
-    mavenLocal()
     mavenCentral()
     jcenter()
     maven() {
