@@ -8,8 +8,6 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 public interface ArtistRepository
 		extends PagingAndSortingRepository<Artist, Long> {
 
-	Artist findById(Long id);
-
 	Artist findByName();
 
 }

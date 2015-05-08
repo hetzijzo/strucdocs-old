@@ -10,8 +10,6 @@ import java.util.List;
 public interface SongRepository
 		extends PagingAndSortingRepository<Song, Long> {
 
-	Song findById(Long id);
-
 	List<Song> findByTitle(String title);
 
 }

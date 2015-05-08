@@ -6,10 +6,10 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
 @RepositoryRestResource(collectionResourceRel = "musicians", path = "musicians")
 public interface MusicianRepository
-		extends PagingAndSortingRepository<Musician, Long> {
+        extends PagingAndSortingRepository<Musician, Long> {
 
-	Musician findById(Long id);
+    Musician findByUsername(String username);
 
-	Musician findByName(String name);
+    Musician findByName(String name);
 
 }

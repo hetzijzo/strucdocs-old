@@ -45,14 +45,17 @@ dependencies {
     compile("org.jsoup:jsoup:${jsoupVersion}")
 
     compile("org.springframework.boot:spring-boot-starter-actuator")
+    compile("org.springframework.boot:spring-boot-starter-data-jpa")
     compile("org.springframework.boot:spring-boot-starter-data-rest")
     compile("org.springframework.boot:spring-boot-starter-hateoas")
-    compile("org.springframework.boot:spring-boot-starter-remote-shell")
+    compile("org.springframework.boot:spring-boot-stater-remote-shell")
     compile("org.springframework.boot:spring-boot-starter-security")
     compile("org.springframework.boot:spring-boot-starter-web")
     compile("org.springframework.data:spring-data-neo4j:${springDataNeo4jVersion}")
 
     provided("org.projectlombok:lombok:${lombokVersion}")
+
+    runtime("org.hsqldb:hsqldb")
 
     testCompile("junit:junit")
     testCompile("org.hamcrest:hamcrest-all:1.1")

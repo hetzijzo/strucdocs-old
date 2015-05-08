@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletResponse;
+import javax.sql.DataSource;
 import java.io.IOException;
 
 @RestController
@@ -26,12 +27,15 @@ public class DocumentController {
 	@Autowired
 	private DocumentComponent documentComponent;
 
+    @Autowired
+    private DataSource dataSource;
+
 	@RequestMapping(value = "/songs/{songId}", method = RequestMethod.GET)
-	@PreAuthorize("hasRole('ROLE_ADMIN')")
-	public ResponseEntity<Void> getDocument(HttpServletResponse servletResponse, @PathVariable("songId") Long songId)
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    public ResponseEntity<Void> getDocument(HttpServletResponse servletResponse, @PathVariable("songId") Long songId)
 			throws DocumentException, IOException {
-		Song song = songRepository.findById(songId);
-		if (song == null) {
+        Song song = songRepository.findOne(songId);
+        if (song == null) {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
 

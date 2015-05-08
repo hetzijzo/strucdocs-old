@@ -2,7 +2,7 @@ package com.strucdocs.ui;
 
 //@SpringUI
 public class StrucDocsUI {
-    // extends UI {
+       // extends UI {
 
 //    private BandRepository bandRepository;
 //
