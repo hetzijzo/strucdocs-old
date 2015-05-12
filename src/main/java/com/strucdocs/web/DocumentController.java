@@ -7,14 +7,12 @@ import com.strucdocs.repository.SongRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletResponse;
-import javax.sql.DataSource;
 import java.io.IOException;
 
 @RestController
@@ -27,11 +25,7 @@ public class DocumentController {
 	@Autowired
 	private DocumentComponent documentComponent;
 
-    @Autowired
-    private DataSource dataSource;
-
 	@RequestMapping(value = "/songs/{songId}", method = RequestMethod.GET)
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public ResponseEntity<Void> getDocument(HttpServletResponse servletResponse, @PathVariable("songId") Long songId)
 			throws DocumentException, IOException {
         Song song = songRepository.findOne(songId);
@@ -46,5 +40,4 @@ public class DocumentController {
 
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
-
 }

@@ -19,7 +19,7 @@ import java.util.Set;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@EqualsAndHashCode(of = {"id", "username"})
+@EqualsAndHashCode(of = {"id", "user"})
 @ToString(exclude = {"roles"})
 public class Musician
 		implements Serializable {
@@ -30,8 +30,8 @@ public class Musician
 	private Long id;
 
 	@NotNull
-	@Indexed(indexType = IndexType.LABEL, unique = true)
-	private String username;
+    @RelatedTo(type = Relationship.IS)
+    private User user;
 
 	@NotNull
 	@Indexed(indexName = "musician.name", indexType = IndexType.FULLTEXT)
