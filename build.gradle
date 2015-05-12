@@ -47,7 +47,7 @@ dependencies {
     compile("org.springframework.boot:spring-boot-starter-actuator")
     compile("org.springframework.boot:spring-boot-starter-data-rest")
     compile("org.springframework.boot:spring-boot-starter-hateoas")
-//    compile("org.springframework.boot:spring-boot-starter-remote-shell")
+    compile("org.springframework.boot:spring-boot-starter-remote-shell")
     compile("org.springframework.boot:spring-boot-starter-security")
     compile("org.springframework.boot:spring-boot-starter-web")
     compile("org.springframework.data:spring-data-neo4j:${springDataNeo4jVersion}")
