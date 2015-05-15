@@ -10,5 +10,6 @@ public enum Instrument {
 	PERCUSSIONIST,
 	BRASS,
 	WOODWIND,
-	TECHNICIAN;
+	TECHNICIAN,
+	OTHER;
 }

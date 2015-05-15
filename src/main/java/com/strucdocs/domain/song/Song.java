@@ -54,8 +54,12 @@ public class Song
 	private final Set<SongPart> parts = new LinkedHashSet<>();
 
 	/* Transient fields */
-	private Note transposedKey;
+	private transient Note transposedKey;
 
+	/**
+	 * Get all SongParts of this Song.
+	 * @return
+	 */
 	public Set<SongPart> getParts() {
 		return Collections.unmodifiableSet(parts);
 	}

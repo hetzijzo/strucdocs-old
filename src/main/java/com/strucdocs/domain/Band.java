@@ -9,12 +9,17 @@ import org.springframework.data.neo4j.annotation.GraphId;
 import org.springframework.data.neo4j.annotation.Indexed;
 import org.springframework.data.neo4j.annotation.NodeEntity;
 import org.springframework.data.neo4j.annotation.RelatedTo;
+import org.springframework.data.neo4j.annotation.RelatedToVia;
 import org.springframework.data.neo4j.support.index.IndexType;
 
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
+import java.util.HashSet;
 import java.util.Set;
 
+/**
+ * A (cover) Band with members ({@link Musician Musicians}) and a {@link Repertoire}.
+ */
 @NodeEntity
 @JsonAutoDetect
 @Data
@@ -36,13 +41,13 @@ public class Band
 	public String name;
 
 	@RelatedTo(type = Relationship.PLAYS_IN, direction = Direction.INCOMING)
-	public Set<Musician> musicians;
+	public Set<Musician> musicians = new HashSet<>();
 
 //	@RelatedToVia(type = Relationship.PLAYS_IN, direction = Direction.INCOMING)
 //	private Iterable<MusicianRole> musicianRoles;
 
 	@RelatedTo(type = Relationship.PLAYS_GENRE, direction = Direction.INCOMING)
-	public Set<Genre> genres;
+	public Set<Genre> genres = new HashSet<>();
 
 	@RelatedTo(type = "PLAYS_REPERTOIRE", direction = Direction.OUTGOING)
 	@JsonIgnore

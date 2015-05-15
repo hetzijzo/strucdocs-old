@@ -1,5 +1,8 @@
 package com.strucdocs.domain.chord;
 
+/**
+ * A single Note according to the (12-tone) chromatic scale.
+ */
 public enum Note {
 	A("A"),
 	ASharp("A#"),
@@ -19,9 +22,12 @@ public enum Note {
 	GSharp("G#"),
 	AFlat("Ab");
 
+    /**
+     *
+     */
 	String notation;
 
-	private Note(String notation) {
+	Note(String notation) {
 		this.notation = notation;
 	}
 

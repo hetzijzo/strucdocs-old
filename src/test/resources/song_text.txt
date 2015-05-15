@@ -71,12 +71,12 @@ Dm                   Am                G
  Rode wijn op het terras dat je heel de wereld voor mij was
 C                            G
  Het ziet nog veel te diep in mij
-Dm                          Am                  G          F-E
+Dm                          Am                  G          F E
  Dat ik vergat hoe jij me zag, dat ik zo anders ben dan jij
 
 
 Solo: Am Am/G F E (x2)
-                    Am Am/G F~  (x1)
+                    Am Am/G F  (x1)
 
 Verse 4:
             A#m       A#m/G#
@@ -99,10 +99,9 @@ D#m                          A#m       G#
  Ik kan de wereld laten zien dat het zo beter is misschien
 C#                      G#
  Het is allang verleden tijd
-D#m                            A#m*             G#*     F#*
+D#m                            A#m             G#     F#
  Dat ik vergat hoe jij me zag, dat ik zo anders ben dan jij
 
-(* : strum once & let ring)
 
 Outro:
-A#m* - G#* - F#*
+A#m - G# - F#

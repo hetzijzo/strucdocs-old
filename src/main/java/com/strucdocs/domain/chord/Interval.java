@@ -1,5 +1,8 @@
 package com.strucdocs.domain.chord;
 
+/**
+ * Enum of Intervals as defined in http://en.wikipedia.org/wiki/Interval_%28music%29
+ */
 public enum Interval {
 	second("2"),
 	minor("m"),
@@ -17,9 +20,12 @@ public enum Interval {
 	dim5("b5"),
 	aug5("#5");
 
+    /**
+     * The notation of the Interval
+     */
 	String notation;
 
-	private Interval(String notation) {
+	Interval(String notation) {
 		this.notation = notation;
 	}
 

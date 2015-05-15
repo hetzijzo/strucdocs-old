@@ -3,6 +3,7 @@ package com.strucdocs.component.importer;
 import com.strucdocs.domain.chord.Chord;
 import com.strucdocs.domain.song.Song;
 import com.strucdocs.domain.song.SongLine;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.util.Set;
@@ -12,6 +13,7 @@ import static org.hamcrest.core.Is.is;
 import static org.hamcrest.core.IsNull.notNullValue;
 import static org.junit.Assert.assertThat;
 
+@Ignore
 public class ImportComponentTabsRUsImplTest {
 
 	private ImportComponent importComponent = new ImportComponentTabsRUsImpl();
