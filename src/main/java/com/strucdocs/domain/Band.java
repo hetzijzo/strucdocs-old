@@ -38,9 +38,6 @@ public class Band
 	@RelatedTo(type = Relationship.PLAYS_IN, direction = Direction.INCOMING)
 	public Set<Musician> musicians;
 
-//	@RelatedToVia(type = Relationship.PLAYS_IN, direction = Direction.INCOMING)
-//	private Iterable<MusicianRole> musicianRoles;
-
 	@RelatedTo(type = Relationship.PLAYS_GENRE, direction = Direction.INCOMING)
 	public Set<Genre> genres;
 
