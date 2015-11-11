@@ -12,3 +12,10 @@ branches:
     - /^hotfix.*$/
 notifications:
   email: false
+deploy:
+  provider: openshift
+  user: w.cheizoo@gmail.com
+  password: 42554255
+  domain: hetzijzo
+  app: strucdocs
+  on: develop
