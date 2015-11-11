@@ -8,7 +8,7 @@ branches:
   only:
     - master
     - develop
-    - /^feature-.*$/
-    - /^hotfix-.*$/
+    - /^feature.*$/
+    - /^hotfix.*$/
 notifications:
   email: false
