@@ -20,6 +20,9 @@ import java.io.Serializable;
 import java.util.*;
 import java.util.stream.Collectors;
 
+/**
+ * A Chord is a full chord with a {@link Note note} and a {@link Note groundnote}.
+ */
 @NodeEntity(partial = true)
 @JsonSerialize(using = ChordJsonSerializer.class)
 @JsonDeserialize(using = ChordJsonDeserializer.class)
@@ -93,6 +96,9 @@ public class Chord
         }
 
         Note note = getHighestMatching(Note.class, chordString);
+        if (note == null) {
+            return null;
+        }
 
         Chord chord = Chord.builder()
                 .note(note)
@@ -102,20 +108,23 @@ public class Chord
         String chordAdditionalString = StringUtils.substringAfter(chordString, note.notation);
         while (!chordAdditionalString.isEmpty()) {
             Interval addition = getHighestMatching(Interval.class, chordAdditionalString);
-            chord.addChordAddition(addition);
-            chordAdditionalString = StringUtils.substringAfter(chordAdditionalString, addition.notation);
+            if (addition != null) {
+                chord.addChordAddition(addition);
+                chordAdditionalString = StringUtils.substringAfter(chordAdditionalString, addition.notation);
+            }
         }
 
         return chord;
     }
 
     private static <T extends Enum> T getHighestMatching(Class<T> itemsClass, final String stringValue) {
-        return getMatchingScores(itemsClass, stringValue).entrySet()
-                .stream()
-                .filter(e -> stringValue.indexOf(e.getKey().toString()) == 0)
-                .max((e1, e2) -> e1.getValue().compareTo(e2.getValue()))
-                .get()
-                .getKey();
+        Optional<Map.Entry<T, Double>> max = getMatchingScores(itemsClass, stringValue).entrySet().stream()
+                        .filter(e -> stringValue.indexOf(e.getKey().toString()) == 0)
+                        .max((e1, e2) -> e1.getValue().compareTo(e2.getValue()));
+        if (max.isPresent()) {
+            return max.get().getKey();
+        }
+        return null;
     }
 
     private static <T extends Enum> Map<T, Double> getMatchingScores(Class<T> itemsClass, final String stringValue) {

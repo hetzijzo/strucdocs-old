@@ -12,6 +12,10 @@ import java.util.Collection;
 
 import static java.util.Arrays.asList;
 
+/**
+ * A implementation of {@link org.springframework.security.core.userdetails.UserDetails}. It represents a User in the
+ * StrucDocs system.
+ */
 @NodeEntity
 @Data
 @NoArgsConstructor

@@ -10,9 +10,13 @@ import org.springframework.data.neo4j.support.index.IndexType;
 
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
+/**
+ * A Musician is a person who plays in a {@link Band}. A Musician is also a {@link User} in the StrucDocs system.
+ */
 @NodeEntity
 @JsonAutoDetect
 @Data
@@ -53,12 +57,25 @@ public class Musician
 	@Fetch
 	private Set<MusicianRole> roles = new HashSet<>();
 
+    /**
+     * Create a {@link Instrument}al role for this Musician in a {@link Band}
+     * @param band The Band
+     * @param instrument The Instrument
+     * @return A MusicianRole object
+     */
 	public MusicianRole playsIn(final Band band, final Instrument instrument) {
 		final MusicianRole role = new MusicianRole(this, band, instrument);
-		if (roles == null) {
-			roles = new HashSet<>();
-		}
+        	if (roles == null) {
+	            roles = new HashSet<>();
+        	}
 		roles.add(role);
 		return role;
 	}
+
+    public Set<MusicianRole> getRoles() {
+        if (roles == null) {
+            roles = new HashSet<>();
+        }
+        return Collections.unmodifiableSet(roles);
+    }
 }

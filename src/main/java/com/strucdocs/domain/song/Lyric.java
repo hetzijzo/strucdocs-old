@@ -28,8 +28,11 @@ public class Lyric
 	@Indexed(indexName = "lyricText", indexType = IndexType.FULLTEXT)
 	private String text;
 
-	public Lyric(String text) {
-		Assert.hasText(text);
+	/**
+	 * Construct a Lyric with required text.
+	 * @param text String representation of the Lyric
+	 */
+	public Lyric(@NotNull String text) {
 		this.text = text;
 	}
 }

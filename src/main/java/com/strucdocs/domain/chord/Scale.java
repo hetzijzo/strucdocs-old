@@ -1,9 +1,16 @@
 package com.strucdocs.domain.chord;
 
+import com.strucdocs.domain.Transposable;
+
 import java.util.Arrays;
 import java.util.LinkedList;
 
+/**
+ * The chromatic scale as defined in http://en.wikipedia.org/wiki/Chromatic_scale. There are two ways of interpreting
+ * a scale: 1. Going up 2. Going down.
+ */
 public enum Scale {
+
 	Up(Note.A, Note.ASharp, Note.B, Note.C, Note.CSharp, Note.D, Note.DSharp,
 	   Note.E, Note.F, Note.FSharp, Note.G, Note.GSharp),
 	Down(Note.AFlat, Note.G, Note.GFlat, Note.F, Note.E, Note.EFlat, Note.D, Note.DFlat,
@@ -11,7 +18,7 @@ public enum Scale {
 
 	final LinkedList<Note> notes;
 
-	private Scale(Note... notes) {
+	Scale(Note... notes) {
 		this.notes = new LinkedList<>(Arrays.asList(notes));
 	}
 

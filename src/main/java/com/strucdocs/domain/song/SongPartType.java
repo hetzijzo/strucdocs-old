@@ -4,7 +4,8 @@ public enum SongPartType {
 	INTRO,
 	VERSE,
 	COUPLET,
-	REFRAIN,
+	CHORUS,
+	SOLO,
 	BRIDGE,
 	OUTRO;
 }

@@ -3,13 +3,15 @@ package com.strucdocs.domain;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 
-@NoArgsConstructor(access = AccessLevel.PRIVATE)
-public final class Relationship {
+/**
+ * Interface which defines all Neo4J relations.
+ */
+public interface Relationship {
 
-	public static final String IS = "IS";
-	public static final String CONTAINS_SONG = "CONTAINS_SONG";
-	public static final String PLAYS_IN = "PLAYS_IN";
-	public static final String PERFORMED_BY = "PERFORMED_BY";
-	public static final String PLAYS_GENRE = "PLAYS_GENRE";
+	String IS = "IS";
+	String CONTAINS_SONG = "CONTAINS_SONG";
+	String PLAYS_IN = "PLAYS_IN";
+	String PERFORMED_BY = "PERFORMED_BY";
+	String PLAYS_GENRE = "PLAYS_GENRE";
 
 }
