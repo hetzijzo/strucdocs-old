@@ -6,7 +6,6 @@ import com.strucdocs.domain.song.Song;
 import org.junit.Test;
 
 import java.io.ByteArrayOutputStream;
-import java.io.OutputStream;
 
 public class ImportComponentTextImplTest {
 
@@ -20,8 +19,8 @@ public class ImportComponentTextImplTest {
 
         Song song = importComponent.importSong("song_text.txt");
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-        documentComponent.generateDocumentToOutputStream(outputStream, song);
-
-        System.out.println(outputStream.toString());
+//        documentComponent.generateDocumentToOutputStream(outputStream, song);
+//
+//        System.out.println(outputStream.toString());
     }
 }

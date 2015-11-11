@@ -26,7 +26,8 @@ public class DocumentComponentImpl
 		PdfDocument document = new PdfDocument();
 		PdfWriter writer = PdfWriter.getInstance(document, outputStream);
 		writer.getTabs();
-		document.open();
+        document.addWriter(writer);
+        document.open();
 
 		String songTitle = song.getTitle();
 		document.addCreationDate();
