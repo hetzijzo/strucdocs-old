@@ -1,9 +1,6 @@
 buildscript {
     repositories {
         jcenter()
-        maven {
-            url 'http://repo.spring.io/plugins-release'
-        }
         dependencies {
             classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
             classpath('io.spring.gradle:dependency-management-plugin:0.5.2.RELEASE')
@@ -42,9 +39,6 @@ configurations {
 
 repositories {
     jcenter()
-    maven() {
-        url 'http://m2.neo4j.org/content/repositories/releases'
-    }
 }
 
 dependencies {
