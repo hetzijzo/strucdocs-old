@@ -65,9 +65,9 @@ public class Musician
      */
 	public MusicianRole playsIn(final Band band, final Instrument instrument) {
 		final MusicianRole role = new MusicianRole(this, band, instrument);
-        if (roles == null) {
-            roles = new HashSet<>();
-        }
+        	if (roles == null) {
+	            roles = new HashSet<>();
+        	}
 		roles.add(role);
 		return role;
 	}
