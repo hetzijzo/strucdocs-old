@@ -1,5 +1,8 @@
 include ":strucdocs-api",
     ":strucdocs-config-server",
+    ":strucdocs-import-service",
+    ":strucdocs-repertoire-service",
+    ":strucdocs-song-service",
     ":strucdocs-transpose-service",
     ":strucdocs-user-service"
 rootProject.name = 'strucdocs'
