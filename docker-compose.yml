@@ -1,0 +1,10 @@
+configserver:
+  image: strucdocs/config-server
+  ports:
+   - "8888:8888"
+transposeservice:
+  image: strucdocs/transpose-service
+  ports:
+   - "8080:8080"
+  links:
+   - configserver

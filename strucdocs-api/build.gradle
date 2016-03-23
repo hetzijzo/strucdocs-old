@@ -34,7 +34,3 @@ dependencies {
 
     compile('org.springframework.security:spring-security-core')
 }
-
-task wrapper(type: Wrapper) {
-    gradleVersion = '2.9'
-}
