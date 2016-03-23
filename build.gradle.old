@@ -1,0 +1,102 @@
+//buildscript {
+//    repositories {
+//        jcenter()
+//    }
+//    dependencies {
+//        classpath("org.springframework.boot:spring-boot-gradle-plugin:$springBootVersion")
+//        classpath("io.spring.gradle:dependency-management-plugin:$springDependencyManagementVersion")
+//        classpath("org.ajoberstar:gradle-git:$gradleGitVersion")
+//        classpath("com.github.ben-manes:gradle-versions-plugin:$gradleVersionPluginVersion")
+//        classpath("se.transmode.gradle:gradle-docker:$gradleDockerVersion")
+//        classpath("org.asciidoctor:asciidoctor-gradle-plugin:$asciiDoctorGradlePluginVersion")
+//    }
+//}
+//
+//plugins {
+//    id 'org.sonarqube' version '1.0'
+//    id 'nebula.provided-base' version '3.0.3'
+//}
+//
+////apply plugin: 'asciidoctor'
+////apply plugin: 'build-dashboard'
+////apply plugin: 'checkstyle'
+//apply plugin: 'idea'
+//apply plugin: 'io.spring.dependency-management'
+////apply plugin: 'jacoco'
+//apply plugin: 'java'
+////apply plugin: 'project-report'
+//apply plugin: 'spring-boot'
+//
+//mainClassName = 'com.strucdocs.StrucDocsApplication'
+//
+//configurations {
+//    provided
+//}
+//
+//repositories {
+//    jcenter()
+//    maven { url "https://m2.neo4j.org" }
+//    maven { url "https://repo.spring.io/libs-release" }
+//}
+//
+//dependencies {
+//    compile("com.fasterxml.jackson.dataformat:jackson-dataformat-xml")
+//    compile("com.itextpdf:itextpdf:${itextPdfVersion}")
+//    compile("com.jayway.jsonpath:json-path:0.9.1")
+//    compile("com.vaadin:vaadin-spring-boot-starter:${vaadinBootStarterVersion}")
+//    compile("commons-io:commons-io:2.4")
+//    compile("org.apache.commons:commons-lang3:3.3.2")
+//    compile("org.asciidoctor:asciidoctorj:${asciiDoctorVersion}")
+//    compile("org.codehaus.jackson:jackson-mapper-asl:1.9.13")
+//    compile("org.jsoup:jsoup:${jsoupVersion}")
+//
+//    compile("org.springframework.boot:spring-boot-starter-actuator")
+//    compile("org.springframework.boot:spring-boot-starter-data-rest")
+//    compile("org.springframework.boot:spring-boot-starter-hateoas")
+//    compile("org.springframework.boot:spring-boot-starter-remote-shell")
+//    compile("org.springframework.boot:spring-boot-starter-security")
+//    compile("org.springframework.boot:spring-boot-starter-web")
+//    compile("org.springframework.data:spring-data-neo4j:${springDataNeo4jVersion}")
+//
+//    provided("org.projectlombok:lombok:$lombokVersion")
+//
+//    runtime("org.hsqldb:hsqldb")
+//
+//    testCompile("junit:junit")
+//    testCompile("org.hamcrest:hamcrest-all:1.1")
+//    testCompile("org.mockito:mockito-core")
+//    testCompile("org.springframework.boot:spring-boot-starter-test")
+//}
+//
+//dependencyManagement {
+//    imports {
+//        mavenBom "org.springframework.boot:spring-boot-starter-parent:$springBootVersion"
+//        mavenBom "com.vaadin:vaadin-bom:$vaadinBomVersion"
+//    }
+//}
+//
+////asciidoctor {
+////    backend = 'html'
+////}
+//
+//afterEvaluate {
+//    tasks.findAll { it.name.startsWith("reference") }.each { it.dependsOn.add("asciidoctor") }
+//}
+//
+//sourceSets {
+//    main {
+//        compileClasspath += [configurations.provided]
+//    }
+//}
+//
+//idea {
+//    module {
+//        scopes.PROVIDED.plus += [configurations.provided]
+//        inheritOutputDirs = false
+//        outputDir = file("$buildDir/classes/main/")
+//    }
+//}
+//
+//task wrapper(type: Wrapper) {
+//    gradleVersion = '2.9'
+//}

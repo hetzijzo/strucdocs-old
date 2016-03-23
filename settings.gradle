@@ -1,0 +1,5 @@
+include ":strucdocs-api",
+    ":strucdocs-config-server",
+    ":strucdocs-transpose-service",
+    ":strucdocs-user-service"
+rootProject.name = 'strucdocs'

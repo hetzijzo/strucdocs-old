@@ -1,0 +1,38 @@
+buildscript {
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:$springBootVersion")
+        classpath("io.spring.gradle:dependency-management-plugin:$springDependencyManagementVersion")
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'io.spring.dependency-management'
+
+repositories {
+    jcenter()
+}
+
+dependencyManagement {
+    imports {
+        mavenBom "org.springframework.boot:spring-boot-starter-parent:$springBootVersion"
+    }
+}
+
+dependencies {
+    compile("org.apache.commons:commons-lang3:3.3.2")
+    compile("com.fasterxml.jackson.core:jackson-core")
+    compile("com.fasterxml.jackson.dataformat:jackson-dataformat-xml")
+    compile("javax.validation:validation-api")
+    compile("org.hibernate:hibernate-validator")
+    compile("org.codehaus.jackson:jackson-mapper-asl:$jacksonMapperVersion")
+    compile("org.projectlombok:lombok:$lombokVersion")
+
+    compile('org.springframework.security:spring-security-core')
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '2.9'
+}
